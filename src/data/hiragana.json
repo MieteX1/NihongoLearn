@@ -1,0 +1,58 @@
+[
+    { "kana": "あ", "romaji": "a", "polski": "a" },
+    { "kana": "い", "romaji": "i", "polski": "i" },
+    { "kana": "う", "romaji": "u", "polski": "u" },
+    { "kana": "え", "romaji": "e", "polski": "e" },
+    { "kana": "お", "romaji": "o", "polski": "o" },
+  
+    { "kana": "か", "romaji": "ka", "polski": "ka" },
+    { "kana": "き", "romaji": "ki", "polski": "ki" },
+    { "kana": "く", "romaji": "ku", "polski": "ku" },
+    { "kana": "け", "romaji": "ke", "polski": "ke" },
+    { "kana": "こ", "romaji": "ko", "polski": "ko" },
+  
+    { "kana": "さ", "romaji": "sa", "polski": "sa" },
+    { "kana": "し", "romaji": "shi", "polski": "si" },
+    { "kana": "す", "romaji": "su", "polski": "su" },
+    { "kana": "せ", "romaji": "se", "polski": "se" },
+    { "kana": "そ", "romaji": "so", "polski": "so" },
+  
+    { "kana": "た", "romaji": "ta", "polski": "ta" },
+    { "kana": "ち", "romaji": "chi", "polski": "ci" },
+    { "kana": "つ", "romaji": "tsu", "polski": "cu" },
+    { "kana": "て", "romaji": "te", "polski": "te" },
+    { "kana": "と", "romaji": "to", "polski": "to" },
+  
+    { "kana": "な", "romaji": "na", "polski": "na" },
+    { "kana": "に", "romaji": "ni", "polski": "ni" },
+    { "kana": "ぬ", "romaji": "nu", "polski": "nu" },
+    { "kana": "ね", "romaji": "ne", "polski": "ne" },
+    { "kana": "の", "romaji": "no", "polski": "no" },
+  
+    { "kana": "は", "romaji": "ha", "polski": "ha" },
+    { "kana": "ひ", "romaji": "hi", "polski": "hi" },
+    { "kana": "ふ", "romaji": "fu", "polski": "fu" },
+    { "kana": "へ", "romaji": "he", "polski": "he" },
+    { "kana": "ほ", "romaji": "ho", "polski": "ho" },
+  
+    { "kana": "ま", "romaji": "ma", "polski": "ma" },
+    { "kana": "み", "romaji": "mi", "polski": "mi" },
+    { "kana": "む", "romaji": "mu", "polski": "mu" },
+    { "kana": "め", "romaji": "me", "polski": "me" },
+    { "kana": "も", "romaji": "mo", "polski": "mo" },
+  
+    { "kana": "ら", "romaji": "ra", "polski": "ra" },
+    { "kana": "り", "romaji": "ri", "polski": "ri" },
+    { "kana": "る", "romaji": "ru", "polski": "ru" },
+    { "kana": "れ", "romaji": "re", "polski": "re" },
+    { "kana": "ろ", "romaji": "ro", "polski": "ro" },
+
+    { "kana": "や", "romaji": "ya", "polski": "ja" },
+    { "kana": "ゆ", "romaji": "yu", "polski": "ju" },
+    { "kana": "よ", "romaji": "yo", "polski": "jo" },
+  
+    { "kana": "わ", "romaji": "wa", "polski": "ła" },
+    { "kana": "を", "romaji": "wo", "polski": "o" },
+    { "kana": "ん", "romaji": "n", "polski": "n" }
+  ]
+  

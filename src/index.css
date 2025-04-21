@@ -1,1 +1,84 @@
 @import "tailwindcss";
+
+body {
+  @apply min-h-screen bg-gradient-to-b from-[#0D0D0D] via-[#3E0B63] to-[#0D0D0D] text-white font-sans;
+}
+
+.audiowide {
+  font-family: "Audiowide", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.jp {
+  font-family: "Noto Serif JP", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  letter-spacing: 14.4px;
+}
+
+.btn-m1 {
+  text-decoration: none;
+  border: 2px solid;
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+}
+
+.btn-m1::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  transition: all 650ms;
+}
+
+.btn-blue {
+  border-color: rgb(30, 144, 255);
+}
+
+.btn-blue:hover {
+  box-shadow: 1px 1px 25px 10px rgba(30, 144, 255, 0.4);
+}
+
+.btn-blue:hover::before {
+  left: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(30, 144, 255, 0.4),
+    transparent
+  );
+}
+
+.btn-pink {
+  border-color: rgb(255, 0, 153);
+}
+
+.btn-pink:hover {
+  box-shadow: 1px 1px 25px 10px rgba(255, 0, 153, 0.4);
+}
+
+.btn-pink:hover::before {
+  left: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 0, 153, 0.4),
+    transparent
+  );
+}
+
+.text-stroke {
+  -webkit-text-stroke: 2px rgb(255, 0, 153); /* grubość + kolor obrysu */
+}
+
+.fix-stroke {
+  paint-order: stroke fill;
+}
+
+
+
