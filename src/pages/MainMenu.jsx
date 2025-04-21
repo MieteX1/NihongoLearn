@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Logo from "../components/Logo";
 import Footer from "../components/Footer";
@@ -7,27 +6,28 @@ import ImageTile from "../components/ImageTile";
 
 
 const menuItems = [
-  { label: "Literatura teoretyczna", path: "/encyclopedia" },
+  { label: "Literatura teoretyczna", path: "/encyclopedia", colorClass: "btn-green"  },
   {
     label: "Quiz",
+    colorClass: "btn-blue",
     subItems: [
-      { label: "Hiragana", path: "/quiz/hiragana" },
-      { label: "Katakana", path: "/quiz/katakana" },
+      { label: "Hiragana", path: "/quiz/hiragana", colorClass: "btn-bluegreen", },
+      { label: "Katakana", path: "/quiz/katakana", colorClass: "btn-bluepink",},
     ],
   },
   {
-    label: "Wpisz znak",
+    label: "Znak → romaji",
+    colorClass: "btn-pink",
     subItems: [
-      { label: "Hiragana", path: "/input/hiragana" },
-      { label: "Katakana", path: "/input/katakana" },
+      { label: "Hiragana", path: "/input/hiragana", colorClass: "btn-pinkgreen" },
+      { label: "Katakana", path: "/input/katakana", colorClass: "btn-pinkblue" },
     ],
   },
-  { label: "Opinie", path: "/opinions" },
-  { label: "Ustawienia", path: "/settings" },
+  { label: "Opinie", path: "/opinions", colorClass: "btn-green" },
+  { label: "Ustawienia", path: "/settings", colorClass: "btn-green" },
 ];
 
 export default function MainMenu() {
-  const [openIndex, setOpenIndex] = useState(null);
 
   return (
     <div className="px-4">
@@ -44,46 +44,37 @@ export default function MainMenu() {
         </div>
 
         {/* Środkowa kolumna - menu */}
-        <div className="flex flex-col items-center gap-4">
-          {menuItems.map((item, index) => (
-            <div key={item.label} className="w-full max-w-xs text-center">
+        <div className="flex flex-col items-center gap-12">
+          {menuItems.map((item) => (
+            <div key={item.label} className="w-3/4 text-center">
               {item.subItems ? (
                 <button
-                  onClick={() =>
-                    setOpenIndex(openIndex === index ? null : index)
-                  }
-                  className="bg-white text-black px-6 py-3 rounded-2xl shadow-md w-full text-xl font-semibold hover:bg-gray-100 transition"
+                  className={`btn-m1 ${item.colorClass} audiowide py-4 w-full text-2xl`}
                 >
                   {item.label}
                 </button>
               ) : (
                 <Link to={item.path}>
-                  <div className="bg-white text-black px-6 py-3 rounded-2xl shadow-md w-full text-xl font-semibold hover:bg-gray-100 transition">
+                  <div className={`btn-m1 ${item.colorClass} py-4 audiowide w-full text-2xl`}>
                     {item.label}
                   </div>
                 </Link>
               )}
 
-              <AnimatePresence>
-                {item.subItems && openIndex === index && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    className="mt-2 space-y-2"
-                  >
-                    {item.subItems.map((sub) => (
-                      <Link
-                        key={sub.label}
-                        to={sub.path}
-                        className="block bg-gray-100 px-4 py-2 rounded-xl hover:bg-gray-200 transition"
-                      >
-                        {sub.label}
-                      </Link>
-                    ))}
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              {item.subItems && (
+                <div className="flex flex-col items-center mt-6 space-y-6">
+                  {item.subItems.map((sub) => (
+                    <Link
+                      key={sub.label}
+                      to={sub.path}
+                      className={`block btn-m1 ${sub.colorClass} audiowide py-4 w-4/5 text-2xl`}
+                    >
+                      {sub.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+
             </div>
           ))}
         </div>
