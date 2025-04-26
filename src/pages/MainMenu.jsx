@@ -1,18 +1,18 @@
-import { motion, AnimatePresence } from "framer-motion";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import Logo from "../components/Logo";
 import Footer from "../components/Footer";
 import ImageTile from "../components/ImageTile";
 
+
 const menuItems = [
-  { label: "Literatura teoretyczna", path: "/encyclopedia", colorClass: "btn-green" },
+  { label: "Literatura teoretyczna", path: "/encyclopedia", colorClass: "btn-green"  },
   {
     label: "Quiz",
     colorClass: "btn-blue",
     subItems: [
-      { label: "Hiragana", path: "/quiz/hiragana", colorClass: "btn-bluegreen" },
-      { label: "Katakana", path: "/quiz/katakana", colorClass: "btn-bluepink" },
+      { label: "Hiragana", path: "/quiz/hiragana", colorClass: "btn-bluegreen", },
+      { label: "Katakana", path: "/quiz/katakana", colorClass: "btn-bluepink",},
     ],
   },
   {
@@ -28,23 +28,12 @@ const menuItems = [
 ];
 
 export default function MainMenu() {
-  const [clickedItem, setClickedItem] = useState(null);
-  const navigate = useNavigate();
-
-  const handleClick = (label, path, colorClass) => {
-    setClickedItem({ label, path, colorClass });
-
-    // Opóźnienie przejścia – żeby animacja się zdążyła pokazać
-    setTimeout(() => {
-      navigate(path);
-    }, 1000);
-  };
 
   return (
-    <div className="relative px-4">
+    <div className="px-4">
       <Logo className="mb-8 pl-28 pt-14" />
 
-      <div className="grid grid-cols-3 gap-6 items-start mt-4 z-10 relative">
+      <div className="grid grid-cols-3 gap-6 items-start mt-4">
         <div className="flex justify-center ml-16">
           <ImageTile
             src="/img/pathleft.png"
@@ -65,27 +54,27 @@ export default function MainMenu() {
                   {item.label}
                 </button>
               ) : (
-                <button
-                  onClick={() => handleClick(item.label, item.path, item.colorClass)}
-                  className={`btn-m1 ${item.colorClass} py-4 audiowide w-full text-2xl cursor-pointer`}
-                >
-                  {item.label}
-                </button>
+                <Link to={item.path}>
+                  <div className={`btn-m1 ${item.colorClass} py-4 audiowide w-full text-2xl`}>
+                    {item.label}
+                  </div>
+                </Link>
               )}
 
               {item.subItems && (
                 <div className="flex flex-col items-center mt-6 space-y-6">
                   {item.subItems.map((sub) => (
-                    <button
+                    <Link
                       key={sub.label}
-                      onClick={() => handleClick(sub.label, sub.path, sub.colorClass)}
-                      className={`btn-m1 ${sub.colorClass} audiowide py-4 w-4/5 text-2xl cursor-pointer`}
+                      to={sub.path}
+                      className={`block btn-m1 ${sub.colorClass} audiowide py-4 w-4/5 text-2xl`}
                     >
                       {sub.label}
-                    </button>
+                    </Link>
                   ))}
                 </div>
               )}
+
             </div>
           ))}
         </div>
@@ -99,24 +88,14 @@ export default function MainMenu() {
           />
         </div>
       </div>
-
       <Footer />
-
-      {/* ANIMACJA POWIĘKSZENIA */}
-      <AnimatePresence>
-        {clickedItem && (
-          <motion.div
-            key={clickedItem.label}
-            className={`fixed inset-0 z-50 flex items-center border-6 justify-center ${clickedItem.colorClass} text-white`}
-            initial={{ scale: 0.1, opacity: 0.5 }}
-            animate={{ scale: 0.8, opacity: 0.9 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h1 className="text-5xl audiowide">{clickedItem.label}</h1>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 }
+
+/* Dodanie logowania bo osiągnięcia będą dodawać gwiazdki na MainMenu w nagłówku? plan na późny late
+Quiz ma kilka poziomów trudności easy 2 opcje medium 3 opcje oraz hard 4 opcje. Przycisk który daje +1 extension czyli z kreskami i kółkami 
+oraz przycisk który daje +2 extension wszystkie możliwe znaki.
+Dodać popup mówiący że ta czynność zresetuje Ci aktualny quiz. Timer nad quizem.
+Timer oraz ilość poprawnych i niepoprawnych poniżej 
+tryb endless mode  */

@@ -18,6 +18,13 @@ body {
   letter-spacing: 14.4px;
 }
 
+.jp2 {
+  font-family: "Noto Serif JP", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
 .btn-m1 {
   text-decoration: none;
   border: 2px solid;
@@ -161,6 +168,33 @@ body {
     120deg,
     transparent,
     rgba(255, 0, 153, 0.3), 
+   rgba(0, 255, 133, 0.3),  
+    transparent
+  );  
+}
+
+.btn-blue2 {
+  border-color: rgb(30, 144, 255);
+}
+
+.btn-blue2:hover {
+  box-shadow: 1px 1px 25px 10px rgba(30, 144, 255, 0.4);
+}
+
+.btn-whitegreen {
+  border-image: linear-gradient(to right,#FFFFFF,#00FF85) 1;
+}
+
+.btn-whitegreen:hover {
+  box-shadow: 1px 1px 25px 10px rgba(128, 255, 194, 0.4);
+}
+
+.btn-whitegreen:hover::before {
+  left: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.3), 
    rgba(0, 255, 133, 0.3),  
     transparent
   );  
