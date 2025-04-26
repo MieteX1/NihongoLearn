@@ -207,3 +207,16 @@ body {
 .fix-stroke {
   paint-order: stroke fill;
 }
+
+@keyframes rotate360 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(720deg);
+  }
+}
+
+.rotate-animation {
+  animation: rotate360 0.3s ease;
+}

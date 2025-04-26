@@ -19,6 +19,8 @@ export default function KanaQuiz() {
   const [selectedAnswer, setSelectedAnswer] = useState(null)
   const [seconds, setSeconds] = useState(0)
   const [quizFinished, setQuizFinished] = useState(false)
+  const [rotate, setRotate] = useState(false)
+
 
 
 
@@ -98,7 +100,13 @@ export default function KanaQuiz() {
     return () => clearInterval(timer)
   }, [quizFinished])
   
-  
+  useEffect(() => {
+    if (currentQuestion) {
+      setRotate(true)
+      const timeout = setTimeout(() => setRotate(false), 1000) // czas trwania animacji
+      return () => clearTimeout(timeout)
+    }
+  }, [currentQuestion])  
 
   const handleAnswer = (choice) => {
     const correct = currentQuestion.romaji
@@ -211,7 +219,7 @@ export default function KanaQuiz() {
           <p className="text-2xl audiowide mt-4">{answeredQuestions}/{totalQuestions}</p>
           <div className="flex justify-center mt-6">
             <div
-              className="w-44 h-36 relative bg-center bg-no-repeat bg-contain text-4xl jp2"
+              className={`w-44 h-36 relative bg-center bg-no-repeat bg-contain text-4xl jp2 transition-transform duration-1000 ${rotate ? 'rotate-animation' : ''}`}
               style={{ backgroundImage: `url(/img/triangle2.png)` }}
             >
               <div className="absolute top-[25%] left-1/2 -translate-x-1/2">
