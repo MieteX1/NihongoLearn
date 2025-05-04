@@ -94,8 +94,5 @@ export default function MainMenu() {
 }
 
 /* Dodanie logowania bo osiągnięcia będą dodawać gwiazdki na MainMenu w nagłówku? plan na późny late
-Quiz ma kilka poziomów trudności easy 2 opcje medium 3 opcje oraz hard 4 opcje. Przycisk który daje +1 extension czyli z kreskami i kółkami 
-oraz przycisk który daje +2 extension wszystkie możliwe znaki.
-Dodać popup mówiący że ta czynność zresetuje Ci aktualny quiz. Timer nad quizem.
-Timer oraz ilość poprawnych i niepoprawnych poniżej 
+Dodać popup mówiący że ta czynność zresetuje Ci aktualny quiz.
 tryb endless mode  */

@@ -220,3 +220,43 @@ body {
 .rotate-animation {
   animation: rotate360 0.3s ease;
 }
+
+.popup {
+  border-image: linear-gradient(to right, #FF0099 , #1E90FF, #00FF85) 1;
+}
+
+.btn-white {
+  border-color: rgb(255, 255, 255);
+}
+
+.btn-white:hover {
+  box-shadow: 1px 1px 25px 10px rgb(255, 255, 255, 0.4);
+}
+
+.btn-white:hover::before {
+  left: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgb(255, 255, 255, 0.4),
+    transparent
+  );
+}
+
+.btn-black {
+  border: none
+}
+
+.btn-black:hover {
+  box-shadow: 1px 1px 25px 10px rgb(0, 0, 0, 0.4);
+}
+
+.btn-black:hover::before {
+  left: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgb(0, 0, 0, 0.4),
+    transparent
+  );
+}

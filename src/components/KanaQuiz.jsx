@@ -2,6 +2,8 @@ import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { db } from "../firebase"
 import { collection, getDocs } from "firebase/firestore"
+import ConfirmationModal from "./ConfirmationModal"
+
 import Logo from "./Logo"
 
 export default function KanaQuiz() {
@@ -20,9 +22,9 @@ export default function KanaQuiz() {
   const [seconds, setSeconds] = useState(0)
   const [quizFinished, setQuizFinished] = useState(false)
   const [rotate, setRotate] = useState(false)
-
-
-
+  const [modalOpen, setModalOpen] = useState(false)
+  const [modalAction, setModalAction] = useState(() => () => {})
+  const [modalMessage, setModalMessage] = useState("")
 
   useEffect(() => {
     const fetchData = async () => {
@@ -49,7 +51,7 @@ export default function KanaQuiz() {
       }
       setAllQuestions(filteredData)
       setRemainingQuestions(shuffled)
-      setTotalQuestions(shuffled.length / 2)
+      setTotalQuestions(shuffled.length)
       setCurrentQuestion(shuffled[0])
     }
 
@@ -119,11 +121,11 @@ export default function KanaQuiz() {
   
     setTimeout(() => {
       setSelectedAnswer(null)
-      const newRemaining = remainingQuestions.filter(q => q.romaji !== currentQuestion.romaji)
+      const newRemaining = remainingQuestions.filter(q => q.kana !== currentQuestion.kana)
   
       if (newRemaining.length === 0) {
         setRemainingQuestions([])
-        setCurrentQuestion({ kana: "", romaji: "" })
+        setCurrentQuestion({ kana: "End", romaji: "" })
         setQuizFinished(true) // <-- oznacz, że quiz się skończył!
       } else {
         setRemainingQuestions(newRemaining)
@@ -132,8 +134,28 @@ export default function KanaQuiz() {
       
     }, 500)
   }
-  
 
+  const hasProgress = answeredQuestions > 0
+
+  const confirmAndExecute = (actionDescription, action) => {
+    if (!hasProgress) {
+      action()
+    } else {
+      setModalMessage(`${actionDescription}\n\nTwój aktualny postęp w quizie zostanie utracony. Czy chcesz kontynuować?`)
+      setModalAction(() => action)
+      setModalOpen(true)
+    }
+  }
+  
+  const handleModalConfirm = () => {
+    setModalOpen(false)
+    modalAction()
+  }
+  
+  const handleModalCancel = () => {
+    setModalOpen(false)
+  }
+  
   const resetQuiz = () => {
     setCurrentQuestion(null)
     setRemainingQuestions([])
@@ -151,17 +173,21 @@ export default function KanaQuiz() {
 
   // Zapisz ustawienia w localStorage i odśwież stronę
   const handleDifficultyChange = (level) => {
-    setDifficulty(level)
-    localStorage.setItem("difficulty", level)
-    resetQuiz()
-    window.location.reload() // Odświeżenie strony po zmianie poziomu trudności
+    confirmAndExecute("Zmieniasz poziom trudności.", () => {
+      setDifficulty(level)
+      localStorage.setItem("difficulty", level)
+      resetQuiz()
+      window.location.reload()
+    })
   }
 
   const handleExtensionLevelChange = (level) => {
-    setExtensionLevel(level)
-    localStorage.setItem("extensionLevel", level)
-    resetQuiz()
-    window.location.reload() // Odświeżenie strony po zmianie poziomu rozszerzenia
+    confirmAndExecute("Zmieniasz poziom rozszerzenia.", () => {
+      setExtensionLevel(level)
+      localStorage.setItem("extensionLevel", level)
+      resetQuiz()
+      window.location.reload()
+    })
   }
 
   const getDifficultyClass = (level, selectedLevel) => {
@@ -179,6 +205,7 @@ export default function KanaQuiz() {
         ? "btn-pink shadow-[1px_1px_25px_10px_rgba(255,0,153,0.4)]"
         : "btn-pink",
     }
+    
   
     return `${base} ${levelStyles[level] || ""}`
   }
@@ -299,12 +326,14 @@ export default function KanaQuiz() {
 
           <div className="mt-6">
             <button
-              onClick={() => {
-                localStorage.setItem("difficulty", difficulty)
-                localStorage.setItem("extensionLevel", extensionLevel)
-                resetQuiz()
-                window.location.reload()
-              }}
+              onClick={() =>
+                confirmAndExecute("Resetujesz quiz.", () => {
+                  localStorage.setItem("difficulty", difficulty)
+                  localStorage.setItem("extensionLevel", extensionLevel)
+                  resetQuiz()
+                  window.location.reload()
+                })
+              }
               className="py-3 audiowide w-72 text-3xl mt-28 btn-m1 btn-whitegreen"
             >
               Reset
@@ -312,6 +341,12 @@ export default function KanaQuiz() {
           </div>
         </div>
       </div>
+      <ConfirmationModal
+        isOpen={modalOpen}
+        onCancel={handleModalCancel}
+        onConfirm={handleModalConfirm}
+        message={modalMessage}
+      />
     </div>
   )
 }
